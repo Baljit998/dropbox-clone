@@ -1,33 +1,31 @@
-"use client"
+"use client";
 
-import { FileType } from "@/typings"
-import { FileIcon, defaultStyles } from "react-file-icon";
-import { ColumnDef } from "@tanstack/react-table"
+import { FileType } from "@/typings";
+import { FileIcon, defaultStyles, FileIconProps } from "react-file-icon";
+import { ColumnDef } from "@tanstack/react-table";
 import prettyBytes from "pretty-bytes";
 import { COLOR_EXTENSION_MAP } from "@/constants";
 
-
-
 export const columns: ColumnDef<FileType>[] = [
-   {
+  {
     accessorKey: "type",
     header: "type",
     cell: ({ renderValue, ...props }) => {
-    const type = renderValue() as string;
-    const extension: string = type.split("/")[1];
-    return (
-    <div className="w-10">
-    <FileIcon
-    extension={extension}
-    labelColor={COLOR_EXTENSION_MAP[extension]}
-    // @ts—ignore
-    { ...defaultStyles[extension]}
-    />
-    </div>
-);
-},
-},
-
+      const type = renderValue() as string;
+      const extension: string = type.split("/")[1];
+      
+      return (
+        <div className="w-10">
+          <FileIcon
+            extension={extension}
+            labelColor={COLOR_EXTENSION_MAP[extension]}
+            // @ts-ignore
+            {...(defaultStyles[extension] as FileIconProps)}
+          />
+        </div>
+      );
+    },
+  },
   {
     accessorKey: "filename",
     header: "filename",
@@ -39,21 +37,21 @@ export const columns: ColumnDef<FileType>[] = [
   {
     accessorKey: "size",
     header: "Size",
-    cell:({ renderValue, ...props}) => {
-        return <span>{prettyBytes(renderValue() as number)}</span>;
+    cell: ({ renderValue, ...props }) => {
+      return <span>{prettyBytes(renderValue() as number)}</span>;
     },
   },
   {
     accessorKey: "downloadURL",
     header: "Link",
     cell: ({ renderValue, ...props }) => (
-        <a
+      <a
         href={renderValue() as string}
         target="_blank"
         className="underline text-blue-500 hover:text-blue-600"
-        >
-            Download
-        </a>
-        ),
-    },
+      >
+        Download
+      </a>
+    ),
+  },
 ];
