@@ -50,7 +50,7 @@ export default function Home() {
           subsidiaries in
           any form. Copyright Disclaimer under section 107 of the Copyright
           Act
-          1976, allowance is made for "fair use" of this video for education
+          1976, allowance is made for "fair use" for education
           purposes.
           </p>
     </main>
